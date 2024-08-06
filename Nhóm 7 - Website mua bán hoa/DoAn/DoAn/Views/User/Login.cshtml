@@ -1,0 +1,44 @@
+﻿@model DoAn.Models.KhachHang
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <div class="form-container" style="margin: 0px 0px 0px auto">
+
+                    <div class="login-form" style="display:block">
+                        @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <form id="login-form">
+                                <h2 style="margin-bottom: 32px;">Login</h2>
+
+                                <label>Username:</label>
+                                @Html.TextBoxFor(m => m.TaiKhoan, new { @class = "form-control", @placeholder = "Username" })
+                                @Html.ValidationMessageFor(m => m.TaiKhoan, "", new { @class = "text-danger" })
+
+                                <label>Password:</label>
+                                @Html.PasswordFor(m => m.MatKhau, new { @class = "form-control", @placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.MatKhau, "", new { @class = "text-danger" })
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-center", style = "text-align: center; color: red; padding-bottom: 16px" })
+                                <button type="submit">Sign in</button>
+                            </form>
+                        }
+                        <div class="toggle-register">
+                            <p>No account? <a href="/User/Register" id="toggle-link">Create account</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 img-account">
+                <img src="~/Assets/images/ac.png">
+            </div>
+        </div>
+    </div>
+</div>
+

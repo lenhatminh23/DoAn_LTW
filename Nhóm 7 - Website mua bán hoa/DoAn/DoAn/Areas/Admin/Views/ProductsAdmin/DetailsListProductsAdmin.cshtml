@@ -1,0 +1,109 @@
+﻿@model DoAn.Models.Hoa
+
+@{
+    ViewBag.Title = "DetailsListProductsAdmin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    dd {
+        width: 70%;
+        padding: 12px;
+        border-radius: 5px;
+        border: 2px solid #000000;
+        margin-bottom: 28px;
+    }
+
+    dt {
+        margin-bottom: 4px;
+    }
+
+    .col-6 {
+        padding-left: 12rem;
+    }
+</style>
+
+<h2 class="text-center">Detail Product</h2>
+
+<div class="form-horizontal">
+    <hr />
+
+    <div class="row">
+        <div class="col-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.TenSanPham)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TenSanPham)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HinhAnh)
+                </dt>
+
+                <dd style="border:none">
+                    <img src="~/Assets/images/@Model.HinhAnh" style="width:220px" />
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MoTa)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MoTa)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Gia)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Gia)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DonVi)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DonVi)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SoLuong)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SoLuong)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HanSuDung)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.HanSuDung)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MaLoai)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MaLoai)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<p class="mt-xl-5">
+    @Html.ActionLink("Back to List", "ListProductsAdmin", null, new { @class = "btn btn-secondary mr-3" })
+    @Html.ActionLink("Edit", "EditListProductsAdmin",
+            new { id = Model.MaSanPham },
+    new { @class = "btn btn-info" })
+</p>

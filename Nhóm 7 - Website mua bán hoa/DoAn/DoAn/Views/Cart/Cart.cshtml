@@ -1,0 +1,148 @@
+﻿@model List<DoAn.Models.Cart>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    td {
+        padding:12px;
+    }
+    .btn-for-all {
+        border: none;
+        background-color: #ff0000;
+        font-size: 16px;
+        color: #ffffff;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+</style>
+<!------------------------------ cart items details------------------------------>
+
+<div class="small-container cart-page" style="padding:0px">
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Update</th>
+            <th>Subtotal</th>
+            <th>Total</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div class="cart-info">
+                        <img src="~/Assets/images/@item.sHinhAnh">
+                        <div>
+                            <p>@item.sTenSanPham</p><br>
+                            <form action="@Url.Action("XoaGioHang", new { iMaSanPham = @item.iMaSanPham })" method="post">
+                                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                <button type="submit" style="cursor: pointer; color: #ff523b; border:none; font-size:26px; background-color:#ffffff"><i class="ti-trash"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+
+                <form action="@Url.Action("CapNhatGioHang", new { iMaSanPham = item.iMaSanPham })" method="post">
+                    <td>
+
+                        @Html.Hidden("iMaSanPham", item.iMaSanPham)
+                        <input type="number" min="1" name="iSoLuongMoi" value="@item.iSoLuong" class="quantity-input">
+
+                    </td>
+                    <td style="padding-left:0px">
+                        <button type="submit" class="btn-for-all" style="background-color:green">Update</button>
+                    </td>
+                </form>
+                <td>@string.Format("{0:0,0}", @item.dGiaBan)</td>
+                <td>@string.Format("{0:0,0}", @item.dThanhTien)</td>
+            </tr>
+        }
+    </table>
+    <div class="total-price">
+        <table>
+            <tr style="font-size: 20px; font-weight:bold">
+                <td>Total payment</td>
+                <td>@ViewBag.TongThanhTien</td>
+            </tr>
+        </table>
+    </div>
+    <table>
+        <tr>
+            <td>
+                @if (Session["User"] != null)
+                {
+                    if (Model.Count > 0)
+                    {
+                        using (Html.BeginForm("XoaHetGioHang", "Cart", FormMethod.Post, new { id = "delete-all-form" }))
+                        {
+                            <button type="submit" class="btn-for-all">Delete all</button>
+                        }
+                    }
+                }
+            </td>
+            <td>
+                @if (Session["User"] != null)
+                {
+                    if (Model.Count > 0)
+                    {
+                        <form action="@Url.Action("Order", "Cart")" method="post">
+                            @Html.AntiForgeryToken()
+                            <button type="button" class="btn-for-all" data-toggle="modal" data-target="#confirmation-modal" style="background-color: navy">Order</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning" style="text-align: center; color: #ff523b; line-height: 360px; ">
+                            <h1>Your shopping cart is empty. Please add products to your cart before ordering!</h1>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning" style="text-align:center; margin: 32px; padding-top: 64px">
+                        <h1>To continue ordering, please</h1> <a href="@Url.Action("Login", "User")">Login</a> <h2>or</h2> <a href="@Url.Action("Register", "User")">Register</a>.
+                    </div>
+                }
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="confirmation-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog custom-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Order confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to place an order?</p>
+            </div>
+            <div class="modal-footer" style="padding: 20px 20px">
+                <button type="button" class="btn-for-all" data-dismiss="modal" style="float:left">Cancel</button>
+                <button type="submit" class="btn-for-all" id="confirm-payment-btn" style="background-color: navy">Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#confirm-payment-btn").click(function (e) {
+            e.preventDefault();
+
+            $("#confirmation-modal").modal("hide");
+
+
+            $("form").submit();
+        });
+    });
+</script>

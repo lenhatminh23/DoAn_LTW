@@ -1,0 +1,85 @@
+﻿@model DoAn.Models.QuanTriVien
+
+@{
+    ViewBag.Title = "DeleteAdmin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    dd {
+        width: 70%;
+        padding: 12px;
+        border-radius: 5px;
+        border: 2px solid #000000;
+        margin-bottom: 28px;
+    }
+
+    dt {
+        margin-bottom: 4px;
+    }
+
+    .col-6 {
+        padding-left: 12rem;
+    }
+</style>
+
+<h2 class="text-center">Delete Admin</h2>
+
+@using (Html.BeginForm("ConfirmDeleteAdmin", "UserAdmin", FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to delete this admin?');" }))
+{
+    @Html.Hidden("id", Model.MaQTV)
+    <div class="form-horizontal">
+        <hr />
+        <div class="row">
+            <div class="col-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TenQTV)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TenQTV)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EmailQTV)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.EmailQTV)
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="col-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TaiKhoanQTV)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TaiKhoanQTV)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MatKhauQTV)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MatKhauQTV)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="mt-xl-5">
+                @Html.ActionLink("Back to List", "AdminList", null, new { @class = "btn btn-secondary mr-3" })
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,57 @@
+- Yêu cầu phần mềm:
+
+	+ Phiên bản: Microsoft Visual Studio 2013, SQL Server 2019
+
+
+
+- Hướng dẫn cài đặt và chạy chương trình:
+
+	+ Sau khi cài đặt các phần mềm cần thiết, mở ứng dụng SQL và chạy file Doan.sql để dữ liệu được tạo
+
+	+ Tiếp theo mở Visual, mở project chương trình -> kết nối dataabase từ SQL bằng LinQ (phải xóa QuanLyBanHoa trong model trước khi tạo để không gặp lỗi khi chạy chương trình), sau khi tạo đặt tên là QuanLyBanHoa
+
+	+ Có thể ấn F5 để chạy chương trình hoặc vào thư mục View -> Home -> và chạy file Index.cshtml
+
+	+ Khi người dùng đã chạy được chương trình thì có thể xem và mua hàng như bình thường
+
+=> Các chức năng mà người dùng có thể làm:
+
+	- Xem sản phẩm
+
+	- Đăng ký, đăng nhập
+
+	- Gửi phản hồi
+
+	- Đặt hàng, mua hàng
+
+
+
+
+-> Đối với phần Admin có thể truy cập bằng 2 cách
+
+	+ C1: trên thanh URL của trang web, chuyển hướng tới phần Admin bằng đường dẫn /Admin/HomeAdmin/IndexAdmin
+
+	+ C2: vào thư mục Areas -> Admin -> View -> HomeAdmin -> chạy file IndexAdmin
+
+- Sau khi chương trình vào trang chủ của Admin thì sẽ hiển thị được các chức năng mà quản trị viên có thể làm:
+
+	+ Quản lý tài khoản người dùng và admin (thêm, xóa, sửa, chi tiết)
+
+	+ Quản lý danh mục sản phẩm (thêm, xóa, sửa, chi tiết)
+
+	+ Quản lý đơn hàng của khách hàng (tên hoa, số lượng đặt, tổng tiền, tình trạng thanh toán, tình trạng giao hàng)
+
+=> Admin thì người dùng có thể quản lý được tất cả những gì mà trang web hiển thị như sản phẩm, tài khoản, đơn hàng
+
+
+
+
+-> Chạy danh sách sản phẩm và đơn hàng từ việc lấy dữ liệu từ API
+
+	- Trên thanh URL người dùng chuyển hướng tới danh sách sản phẩm API bằng đường dẫn /ProductsAPI/Index, đối với đơn hàng API thì /orderapi/index
+	
+	- Trong phần API thì chỉ mới lấy dữ liệu chứ chưa thực hiện thêm, xóa, sửa trên API
+
+
+
+-----> TRÊN ĐÂY LÀ HƯỚNG DẪN SỬ DỤNG CHƯƠNG TRÌNH ASP.NET MVC, CẢM ƠN VÌ ĐÃ DÙNG CHƯƠNG TRÌNH.

@@ -1,0 +1,93 @@
+﻿@model DoAn.Models.KhachHang
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .success-message {
+        color: red;
+        font-size: 16px;
+        text-align: center;
+        margin-top: 16px;
+    }
+</style>
+
+@using (Ajax.BeginForm("Register", "User", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result", OnSuccess = "registerSuccess" }))
+{
+    <div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <div class="form-container" style="margin: 0px 0px 0px auto">
+                        <form id="register-form">
+                            <h2 style="margin-bottom: 32px;">Register</h2>
+
+                            <label>Full name:</label>
+                            @Html.TextBoxFor(temp => temp.TenKhachHang, new { placeholder = "Full name", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.TenKhachHang)
+
+                            <label>Username:</label>
+                            @Html.TextBoxFor(temp => temp.TaiKhoan, new { placeholder = "Username", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.TaiKhoan)
+
+                            <label>Password:</label>
+                            @Html.PasswordFor(temp => temp.MatKhau, new { placeholder = "Password", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.MatKhau)
+
+                            <label>Email:</label>
+                            @Html.TextBoxFor(temp => temp.Email, new { placeholder = "Email", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.Email)
+
+                            <label>Mobile Phone:</label>
+                            @Html.TextBoxFor(temp => temp.SoDienThoai, new { placeholder = "Mobile Phone", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.SoDienThoai)
+
+                            <label>Gender:</label>
+                            @{
+                                var genderList = new List<SelectListItem>
+                                    {
+                                    new SelectListItem { Text = "Male", Value = "Male" },
+                                    new SelectListItem { Text = "Female", Value = "Female" },
+                                    new SelectListItem { Text = "Other", Value = "Other" }
+                                    };
+                            }
+                            @Html.DropDownListFor(temp => temp.GioiTinh, genderList, "Select Gender", new { @class = "form-control", style = "padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" })
+                            @Html.ValidationMessageFor(temp => temp.GioiTinh)
+
+                            <label>Birthday:</label>
+                            @Html.TextBoxFor(temp => temp.NgaySinh, new { placeholder = "Birthday", @class = "form-control", type = "date", style = "padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" })
+                            @Html.ValidationMessageFor(temp => temp.NgaySinh)
+
+                            <label>Address:</label>
+                            @Html.TextBoxFor(temp => temp.DiaChi, new { placeholder = "Address", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.DiaChi)
+
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <p class="error-message">@ViewBag.ErrorMessage</p>
+                            }
+
+                            <button type="submit">Sign up</button>
+
+                            <div class="toggle-form">
+                                <a href="/User/Login" id="toggle-link-login">Login</a>
+                            </div>
+                            <div id="result"></div>
+                        </form>
+                        @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+                        {
+                            <div class="success-message">
+                                @ViewBag.SuccessMessage
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-2 img-account">
+                    <img src="~/Assets/images/ac.png">
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

@@ -1,0 +1,44 @@
+			{
+					"order": 241,
+					"id": 8,
+					"prevSize": 32,
+					"code": 59071,
+					"name": "archive",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 242,
+					"id": 7,
+					"prevSize": 32,
+					"code": 59072,
+					"name": "anchor",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 243,
+					"id": 6,
+					"prevSize": 32,
+					"code": 59073,
+					"name": "align-right",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 244,
+					"id": 5,
+					"prevSize": 32,
+					"code": 59074,
+					"name": "align-left",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 245,
+					"id": 4,
+					"prevSize": 32,
+					"code": 59075,
+					"name": "align-justify",
+					"tempChar": "",
+					"ligatures": "

@@ -1,0 +1,91 @@
+﻿@model DoAn.Models.PhanHoi
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .success-message {
+        color: #fff;
+        text-align: center;
+        margin-top: 32px;
+        border: 1px solid;
+        background-color:red;
+        border-radius: 5px;
+        padding: 4px;
+    }
+</style>
+@using (Ajax.BeginForm("Contact", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result", OnSuccess = "contactSuccess" }))
+{
+    <div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2" style="padding: 0px 130px">
+                    <img src="~/Assets/images/pngwing.com.png">
+                </div>
+                <div class="col-2">
+                    <div class="form-container" style="margin: 0px auto 0px 0px">
+                        <form id="register-form">
+                            <h2 style="margin-bottom: 32px;">Contact Us</h2>
+
+                            <label>Full name:</label>
+                            @Html.TextBoxFor(temp => temp.TenKhachHang, new { placeholder = "Full name", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.TenKhachHang)
+
+                            <label>Email:</label>
+                            @Html.TextBoxFor(temp => temp.Email, new { placeholder = "Email", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.Email)
+
+                            <label>Mobile Phone:</label>
+                            @Html.TextBoxFor(temp => temp.SoDienThoai, new { placeholder = "Mobile Phone", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.SoDienThoai)
+
+                            <label>Gender:</label>
+                            @{
+                                    var genderList = new List<SelectListItem>
+                                    {
+                                    new SelectListItem { Text = "Male", Value = "Male" },
+                                    new SelectListItem { Text = "Female", Value = "Female" },
+                                    new SelectListItem { Text = "Other", Value = "Other" }
+                                    };
+                            }
+                            @Html.DropDownListFor(temp => temp.GioiTinh, genderList, "Select Gender", new { @class = "form-control", style = "padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" })
+                            @Html.ValidationMessageFor(temp => temp.GioiTinh)
+
+                            <label>Feedback:</label>
+                            @Html.TextBoxFor(temp => temp.NoiDung, new { placeholder = "Enter your feedback", @class = "form-control" })
+                            @Html.ValidationMessageFor(temp => temp.NoiDung)
+
+                            @if (Session["User"] != null)
+                            {
+                                <button type="submit">Send it</button>
+                            }
+                            else
+                            {
+                                <div class="alert alert-warning" style="text-align:center; margin: 16px;">
+                                    To continue contacing, please <a style="font-size:16px; font-weight:bold" href="@Url.Action("Login", "User")">Login</a> or <a style="font-size:16px; font-weight:bold" href="@Url.Action("Register", "User")">Register</a>.
+                                </div>
+                            }
+
+                            <div id="result"></div>
+                        </form>
+                        @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+                        {
+                            <div class="success-message">
+                                @ViewBag.SuccessMessage
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+}
+
+<script>
+    function contactSuccess() {
+        $("#result").html('<div class="success-message">Contact Success</div>');
+    }
+</script>

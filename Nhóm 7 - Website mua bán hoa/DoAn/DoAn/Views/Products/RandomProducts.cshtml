@@ -1,0 +1,27 @@
+﻿@model IEnumerable<DoAn.Models.Hoa>
+@{
+    ViewBag.Title = "RandomProducts";
+    Layout = "~/Views/Shared/_subLayout.cshtml";
+}
+
+<div class="small-container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-4">
+                <a href="@Url.Action("Details", new { id = item.MaSanPham})"><img src="~/Assets/images/@item.HinhAnh"></a>
+                <h4>@item.TenSanPham</h4>
+                <div class="rating">
+
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>@item.Gia</p>
+            </div>
+        }
+    </div>
+</div>
+

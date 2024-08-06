@@ -1,0 +1,58 @@
+: 32,
+					"code": 59045,
+					"name": "eraser",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 216,
+					"id": 33,
+					"prevSize": 32,
+					"code": 59046,
+					"name": "envelope",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 217,
+					"id": 32,
+					"prevSize": 32,
+					"code": 59047,
+					"name": "download",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 218,
+					"id": 31,
+					"prevSize": 32,
+					"code": 59048,
+					"name": "direction",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 219,
+					"id": 30,
+					"prevSize": 32,
+					"code": 59049,
+					"name": "direction-alt",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 220,
+					"id": 29,
+					"prevSize": 32,
+					"code": 59050,
+					"name": "dashboard",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 221,
+					"id": 28,
+					"prevSize": 32,
+					"code": 59051,
+					"name": "control-stop",
+					"t

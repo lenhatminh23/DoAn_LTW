@@ -1,0 +1,123 @@
+﻿@model DoAn.Models.KhachHang
+
+@{
+    ViewBag.Title = "EditUser";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    input{
+        width:100%;
+        padding:12px;
+        border-radius:5px;
+    }
+    .col-6 {
+        padding-left: 7rem;
+    }
+</style>
+
+<h2 class="text-center">Edit User</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.MaKhachHang)
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TenKhachHang, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TenKhachHang)
+                        @Html.ValidationMessageFor(model => model.TenKhachHang)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DiaChi, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DiaChi)
+                        @Html.ValidationMessageFor(model => model.DiaChi)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SoDienThoai, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SoDienThoai)
+                        @Html.ValidationMessageFor(model => model.SoDienThoai)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email)
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NgaySinh, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.NgaySinh, new { type = "date" })
+                        @Html.ValidationMessageFor(model => model.NgaySinh)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TaiKhoan, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TaiKhoan)
+                        @Html.ValidationMessageFor(model => model.TaiKhoan)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MatKhau, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MatKhau)
+                        @Html.ValidationMessageFor(model => model.MatKhau)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GioiTinh, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+    var genderList = new List<SelectListItem>
+                                            {
+                                                new SelectListItem { Text = "Male", Value = "Male" },
+                                                new SelectListItem { Text = "Female", Value = "Female" },
+                                                new SelectListItem { Text = "Other", Value = "Other" }
+                                            };
+                        }
+                        @Html.DropDownListFor(model => model.GioiTinh, genderList, "Select Gender", new { style = "padding: 13px; border-radius:5px" })
+                        @Html.ValidationMessageFor(model => model.GioiTinh)
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        @*<div class="form-group text-center mt-4">
+            <div class="col-md-2 mx-auto">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </div>*@
+
+        <div class="mt-xl-5">
+            @Html.ActionLink("Back to List", "UserList", null, new { @class = "btn btn-secondary mr-3" })
+            <input type="submit" value="Save" class="btn btn-success" style="width:auto" />
+        </div>
+    </div>
+}
+
+
+

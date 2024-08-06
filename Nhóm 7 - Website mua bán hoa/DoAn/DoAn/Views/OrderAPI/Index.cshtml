@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div id="donHangsTable"></div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // Use AJAX to fetch data from the API endpoint
+            $.ajax({
+                url: '/api/Order/GetDonHangsAndChiTiet',
+                method: 'GET',
+                success: function (data) {
+                    // Process the data and render it in the view
+                    var tableHtml = "<table><tr><th>Mã đơn hàng</th><th>Mã khách hàng</th><th>Ngày đặt</th><th>Ngày giao</th></th><th>Tình trạng giao hàng</th></th><th>Tình trạng thanh toán</th></tr>";
+
+                    for (var i = 0; i < data.length; i++) {
+                        tableHtml += "<tr>";
+                        tableHtml += "<td>" + data[i].MaDonHang + "</td>";
+                        tableHtml += "<td>" + data[i].MaKhachHang + "</td>";
+                        tableHtml += "<td>" + data[i].NgayDatHang + "</td>";
+                        tableHtml += "<td>" + data[i].NgayGiaoHang + "</td>";
+                        tableHtml += "<td>" + data[i].TinhTrangGiaoHang + "</td>";
+                        tableHtml += "<td>" + data[i].DaThanhToan + "</td>";
+                        tableHtml += "</tr>";
+                    }
+
+                    tableHtml += "</table>";
+
+                    // Append the table HTML to the div with id "donHangsTable"
+                    $('#donHangsTable').html(tableHtml);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
+}

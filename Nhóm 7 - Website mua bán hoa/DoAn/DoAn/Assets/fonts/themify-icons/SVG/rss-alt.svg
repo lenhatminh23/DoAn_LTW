@@ -1,0 +1,44 @@
+				"id": 60,
+					"prevSize": 32,
+					"code": 59019,
+					"name": "mouse-alt",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 190,
+					"id": 59,
+					"prevSize": 32,
+					"code": 59020,
+					"name": "money",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 191,
+					"id": 58,
+					"prevSize": 32,
+					"code": 59021,
+					"name": "microphone",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 192,
+					"id": 57,
+					"prevSize": 32,
+					"code": 59022,
+					"name": "menu",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 193,
+					"id": 56,
+					"prevSize": 32,
+					"code": 59023,
+					"name": "menu-alt",
+					"tempChar": "",
+					"ligatures": ""
+				},
+	

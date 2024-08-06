@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    @*<meta name="viewport" content="width-device-width, initial-scale=1.0">*@
+    <title>Flowers Store</title>
+    <link rel="stylesheet" href="~/Assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Assets/fonts/themify-icons/themify-icons.css">
+    <link rel="icon" type="image/png" href="~/Assets/images/flower-shop.png">
+</head>
+
+<body>
+    @RenderBody()
+
+    <!-----------------------------------js for toggle menu----------------------------------------------->
+    <script>
+        var menuItems = document.getElementById("MenuItems");
+
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "300px";
+            }
+            else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+    </script>
+    <!-----------------------------------js for button scroll----------------------------------------------->
+    <script>
+        // Hiển thị nút khi kéo xuống dưới một khoảng cách nhất định
+        window.onscroll = function () {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("scrollToTopBtn").style.display = "block";
+            } else {
+                document.getElementById("scrollToTopBtn").style.display = "none";
+            }
+        };
+
+        // Xử lý sự kiện khi click vào nút
+        document.getElementById("scrollToTopBtn").addEventListener("click", function () {
+            scrollToTop();
+        });
+
+        // Cuộn trang lên với hiệu ứng mượt
+        function scrollToTop() {
+            const currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+            if (currentPosition > 0) {
+                window.requestAnimationFrame(scrollToTop);
+                window.scrollTo(0, currentPosition - currentPosition / 30);
+            }
+        }
+    </script>
+</body>
+
+</html>

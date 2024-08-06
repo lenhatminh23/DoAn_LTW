@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DoAn.Models.Hoa>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .active a {
+        color:#ffffff;
+        background-color: #ff523b;
+    }
+</style>
+<!------------------------------ Products------------------------------>
+<h2 class="title">All Products</h2>
+<div class="small-container">
+    <div class="row row-2 products-sort">
+        <select id="sortSelect" onchange="sortAndNavigate(this)">
+            <option @if (ViewBag.SortOrder == null) { <text> selected </text>  }>Default sorting</option>
+            <option value="name" @if (ViewBag.SortOrder == "name") { <text> selected </text>  }>Sắp xếp theo tên tăng dần</option>
+            <option value="name_desc" @if (ViewBag.SortOrder == "name_desc") { <text> selected </text>  }>Sắp xếp theo tên giảm dần</option>
+            <option value="price" @if (ViewBag.SortOrder == "price") { <text> selected </text>  }>Sắp xếp theo giá tăng dần</option>
+            <option value="price_desc" @if (ViewBag.SortOrder == "price_desc") { <text> selected </text>  }>Sắp xếp theo giá giảm dần</option>
+        </select>
+    </div>
+
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+           <div class="col-4">
+                <a href="@Url.Action("Details", new { id = item.MaSanPham})"><img src="~/Assets/images/@item.HinhAnh"></a>
+                <h4>@item.TenSanPham</h4>
+                <div class="rating">
+
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>@item.Gia</p>
+            </div> 
+        }
+    </div>
+
+    <div class="page-btn">
+        @if (ViewBag.PageCount > 1 && ViewBag.CurrentPage != null && ViewBag.CurrentPage > 0)
+        {
+            <ul>
+
+                @for (int i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <li class="@(i == ViewBag.CurrentPage ? "active" : "")">
+                        <a style="margin-right: 10px; float: left; padding: 0px 16px; border: 1px solid #ff523b;" href="@Url.Action("ListProducts", new { page_list = i })">@i</a>
+                    </li>
+                }
+            </ul>
+
+        }
+    </div>
+
+</div>
+
+<script>
+    function sortAndNavigate(selectElement) {
+        var selectedValue = selectElement.value;
+
+        // Lấy giá trị trang hiện tại từ URL nếu đã có
+        var urlParams = new URLSearchParams(window.location.search);
+        var currentPage = urlParams.get('page_list') || 1;
+
+        // Chuyển hướng đến trang mới với giá trị sắp xếp và trang hiện tại
+        var url = '@Url.Action("ListProducts")?sortOrder=' + selectedValue + '&page_list=' + currentPage;
+        window.location.href = url;
+    }
+</script>

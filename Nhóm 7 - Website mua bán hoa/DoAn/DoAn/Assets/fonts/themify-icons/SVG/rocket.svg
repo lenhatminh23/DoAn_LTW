@@ -1,0 +1,47 @@
+
+					"id": 86,
+					"prevSize": 32,
+					"code": 58993,
+					"name": "thumb-down",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 164,
+					"id": 85,
+					"prevSize": 32,
+					"code": 58994,
+					"name": "text",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 165,
+					"id": 84,
+					"prevSize": 32,
+					"code": 58995,
+					"name": "stats-up",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 166,
+					"id": 83,
+					"prevSize": 32,
+					"code": 58996,
+					"name": "stats-down",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 167,
+					"id": 82,
+					"prevSize": 32,
+					"code": 58997,
+					"name": "split-v",
+					"tempChar": "",
+					"ligatures": ""
+				},
+				{
+					"order": 168,
+					"id": 

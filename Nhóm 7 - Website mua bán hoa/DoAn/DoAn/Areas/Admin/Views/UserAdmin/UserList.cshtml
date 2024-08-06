@@ -1,0 +1,94 @@
+﻿@model IEnumerable<DoAn.Models.KhachHang>
+
+@{
+    ViewBag.Title = "UserList";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+@if (Session["UserAdmin"] != null)
+{
+    <div class="shadow card mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách khách hàng</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" style="width:100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Tên khách hàng</th>
+                            <th>Địa chỉ</th>
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Ngày sinh</th>
+                            <th>Tài khoản</th>
+                            <th>Mật khẩu</th>
+                            <th>Giới tính</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenKhachHang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DiaChi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoDienThoai)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TaiKhoan)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MatKhau)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "EditUser", new { id = item.MaKhachHang }) |
+                                    @Html.ActionLink("Details", "DetailsUser", new { id = item.MaKhachHang }) |
+                                    @Html.ActionLink("Delete", "DeleteUser", new { id = item.MaKhachHang })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="page-btn">
+                @if (ViewBag.PageCount > 1 && ViewBag.CurrentPage != null && ViewBag.CurrentPage > 0)
+                {
+                    <ul class="pagination">
+
+                        @for (int i = 1; i <= ViewBag.PageCount; i++)
+                        {
+                            <li class="@(i == ViewBag.CurrentPage ? "active paginate_button page-item" : "")">
+                                <a class="page-link" href="@Url.Action("UserList", new { page_list = i })">@i</a>
+                            </li>
+                        }
+                    </ul>
+
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center alert">
+        <h1>Hãy đăng nhập để có quyền quản trị viên!</h1>
+        <a style="font-size:32px" href="@Url.Action("LoginAdmin", "UserAdmin")">Đăng nhập.</a>
+    </div>
+}

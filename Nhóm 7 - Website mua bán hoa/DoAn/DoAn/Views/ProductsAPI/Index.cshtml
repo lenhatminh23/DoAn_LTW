@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="prouctsTable"></div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // Use AJAX to fetch data from the API endpoint
+            $.ajax({
+                url: '/api/Products/GetProducts',
+                method: 'GET',
+                success: function (data) {
+                    // Process the data and render it in the view
+                    var tableHtml = "<table><tr><th>Mã sản phẩm</th><th>Tên sản phẩm</th><th>Hình ảnh</th><th>Mô tả</th><th>Giá</th><th>Đơn vị</th><th>Số lượng</th><th>Mã loại</th></tr>";
+
+                    for (var i = 0; i < data.length; i++) {
+                        tableHtml += "<tr>";
+                        tableHtml += "<td>" + data[i].MaSanPham + "</td>";
+                        tableHtml += "<td>" + data[i].TenSanPham + "</td>";
+                        //tableHtml += "<td>" + data[i].HinhAnh + "</td>";
+                        var imageUrl = window.location.origin + '/Assets/images/' + data[i].HinhAnh;
+                        // Sử dụng URL đã xây dựng trong nguồn hình ảnh
+                        tableHtml += "<td><img src='" + imageUrl + "' alt='Product Image' style='max-width: 100px; max-height: 100px;'></td>";
+                        tableHtml += "<td>" + data[i].MoTa + "</td>";
+                        tableHtml += "<td>" + data[i].Gia + "</td>";
+                        tableHtml += "<td>" + data[i].DonVi + "</td>";
+                        tableHtml += "<td>" + data[i].SoLuong + "</td>";
+                        tableHtml += "<td>" + data[i].MaLoai + "</td>";
+                        tableHtml += "</tr>";
+                    }
+
+                    tableHtml += "</table>";
+
+                    $('#prouctsTable').html(tableHtml);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
+}

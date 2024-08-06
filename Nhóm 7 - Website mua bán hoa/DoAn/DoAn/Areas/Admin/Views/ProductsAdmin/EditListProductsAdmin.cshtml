@@ -1,0 +1,105 @@
+﻿@model DoAn.Models.Hoa
+
+@{
+    ViewBag.Title = "EditListProductsAdmin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 5px;
+    }
+
+    .col-6 {
+        padding-left: 7rem;
+    }
+</style>
+
+<h2 class="text-center">Edit Product</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.MaSanPham)
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TenSanPham, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TenSanPham)
+                        @Html.ValidationMessageFor(model => model.TenSanPham)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HinhAnh, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HinhAnh)
+                        @Html.ValidationMessageFor(model => model.HinhAnh)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MoTa, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MoTa)
+                        @Html.ValidationMessageFor(model => model.MoTa)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Gia, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Gia)
+                        @Html.ValidationMessageFor(model => model.Gia)
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DonVi, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DonVi)
+                        @Html.ValidationMessageFor(model => model.DonVi)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SoLuong, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SoLuong)
+                        @Html.ValidationMessageFor(model => model.SoLuong)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HanSuDung, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.HanSuDung, new { type = "date" })
+                        @Html.ValidationMessageFor(model => model.HanSuDung)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaLoai, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MaLoai)
+                        @Html.ValidationMessageFor(model => model.MaLoai)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-xl-5">
+            @Html.ActionLink("Back to List", "ListProductsAdmin", null, new { @class = "btn btn-secondary mr-3" })
+            <input type="submit" value="Save" class="btn btn-success" style="width:auto" />
+        </div>
+    </div>
+}

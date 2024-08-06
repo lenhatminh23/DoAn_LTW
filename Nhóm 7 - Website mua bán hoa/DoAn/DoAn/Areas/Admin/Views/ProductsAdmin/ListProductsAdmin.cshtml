@@ -1,0 +1,116 @@
+﻿@model IEnumerable<DoAn.Models.Hoa>
+
+@{
+    ViewBag.Title = "ListProductsAdmin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@if (Session["UserAdmin"] != null)
+{
+    <div class="shadow card mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách sản phẩm</h6>
+        </div>
+        <div class="card-body">
+            <p>
+                @Html.ActionLink("Create New", "CreateListProductsAdmin")
+                <select style="border-radius:5px" class="float-right" id="sortSelect" onchange="sortAndNavigate(this)">
+                    <option @if (ViewBag.SortOrder == null) { <text> selected </text>   }>Default sorting</option>
+                    <option value="name" @if (ViewBag.SortOrder == "name") { <text> selected </text>   }>Sắp xếp theo tên tăng dần</option>
+                    <option value="name_desc" @if (ViewBag.SortOrder == "name_desc") { <text> selected </text>   }>Sắp xếp theo tên giảm dần</option>
+                    <option value="price" @if (ViewBag.SortOrder == "price") { <text> selected </text>   }>Sắp xếp theo giá tăng dần</option>
+                    <option value="price_desc" @if (ViewBag.SortOrder == "price_desc") { <text> selected </text>   }>Sắp xếp theo giá giảm dần</option>
+                </select>
+            </p>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" style="width:100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Hình ảnh</th>
+                            <th>Mô tả</th>
+                            <th>Giá</th>
+                            <th>Đơn vị</th>
+                            <th>Số lượng</th>
+                            <th>Hạn sử dụng</th>
+                            <th>Mã loại</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @foreach (var item in Model)
+                       {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenSanPham)
+                                </td>
+                                <td>
+                                    <img src="~/Assets/images/@item.HinhAnh" style="width:100px"/>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MoTa)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Gia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DonVi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoLuong)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HanSuDung)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaLoai)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "EditListProductsAdmin", new { id = item.MaSanPham }) |
+                                    @Html.ActionLink("Details", "DetailsListProductsAdmin", new { id = item.MaSanPham }) |
+                                    @Html.ActionLink("Delete", "DeleteListProductsAdmin", new { id = item.MaSanPham })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="page-btn">
+                @if (ViewBag.PageCount > 1 && ViewBag.CurrentPage != null && ViewBag.CurrentPage > 0)
+                {
+                    <ul class="pagination">
+
+                        @for (int i = 1; i <= ViewBag.PageCount; i++)
+                        {
+                            <li class="@(i == ViewBag.CurrentPage ? "active paginate_button page-item" : "")">
+                                <a class="page-link" href="@Url.Action("ListProductsAdmin", new { page_list = i })">@i</a>
+                            </li>
+                        }
+                    </ul>
+
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center alert">
+        <h1>Hãy đăng nhập để có quyền quản trị viên!</h1>
+        <a style="font-size:32px" href="@Url.Action("LoginAdmin", "UserAdmin")">Đăng nhập.</a>
+    </div>
+}
+
+<script>
+    function sortAndNavigate(selectElement) {
+        var selectedValue = selectElement.value;
+
+        // Lấy giá trị trang hiện tại từ URL nếu đã có
+        var urlParams = new URLSearchParams(window.location.search);
+        var currentPage = urlParams.get('page_list') || 1;
+
+        // Chuyển hướng đến trang mới với giá trị sắp xếp và trang hiện tại
+        var url = '@Url.Action("ListProductsAdmin")?sortOrder=' + selectedValue + '&page_list=' + currentPage;
+        window.location.href = url;
+    }
+</script>

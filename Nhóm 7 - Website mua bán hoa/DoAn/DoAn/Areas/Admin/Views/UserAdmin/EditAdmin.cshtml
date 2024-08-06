@@ -1,0 +1,72 @@
+﻿@model DoAn.Models.QuanTriVien
+
+@{
+    ViewBag.Title = "EditAdmin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 5px;
+    }
+    .col-6 {
+        padding-left: 7rem;
+    }
+</style>
+
+<h2 class="text-center">Edit Admin</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.MaQTV)
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TenQTV, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TenQTV)
+                        @Html.ValidationMessageFor(model => model.TenQTV)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmailQTV, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EmailQTV)
+                        @Html.ValidationMessageFor(model => model.EmailQTV)
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TaiKhoanQTV, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TaiKhoanQTV)
+                        @Html.ValidationMessageFor(model => model.TaiKhoanQTV)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MatKhauQTV, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MatKhauQTV)
+                        @Html.ValidationMessageFor(model => model.MatKhauQTV)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-xl-5">
+            @Html.ActionLink("Back to List", "AdminList", null, new { @class = "btn btn-secondary mr-3" })
+            <input type="submit" value="Save" class="btn btn-success" style="width:auto" />
+        </div>
+    </div>
+}

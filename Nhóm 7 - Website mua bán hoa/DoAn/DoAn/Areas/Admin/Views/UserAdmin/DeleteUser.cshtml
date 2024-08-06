@@ -1,0 +1,118 @@
+﻿@model DoAn.Models.KhachHang
+
+@{
+    ViewBag.Title = "DeleteUser";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    dd {
+        width: 70%;
+        padding: 12px;
+        border-radius: 5px;
+        border: 2px solid #000000;
+        margin-bottom: 28px;
+    }
+
+    dt {
+        margin-bottom: 4px;
+    }
+
+    .col-6 {
+        padding-left: 12rem;
+    }
+</style>
+
+<h2 class="text-center">Delete User</h2>
+
+
+@using (Html.BeginForm("ConfirmDeleteUser", "UserAdmin", FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to delete this user?');" }))
+{
+    @Html.Hidden("id", Model.MaKhachHang)
+    <div class="form-horizontal">
+        <hr />
+        <div class="row">
+            <div class="col-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TenKhachHang)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TenKhachHang)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DiaChi)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DiaChi)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SoDienThoai)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SoDienThoai)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NgaySinh)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NgaySinh)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TaiKhoan)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TaiKhoan)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MatKhau)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MatKhau)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.GioiTinh)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.GioiTinh)
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="mt-xl-5">
+                @Html.ActionLink("Back to List", "UserList", null, new { @class = "btn btn-secondary mr-3" })
+                <input type="submit" value="Delete" class="btn btn-danger" /> 
+            </div>
+        }
+    </div>
+}

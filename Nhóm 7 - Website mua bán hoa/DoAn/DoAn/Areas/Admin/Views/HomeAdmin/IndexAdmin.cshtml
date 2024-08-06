@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "IndexAdmin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@if (Session["UserAdmin"] != null)
+{}
+else
+{
+    <div class="text-center alert">
+        <h1>Hãy đăng nhập để có quyền quản trị viên!</h1>
+        <a style="font-size:32px" href="@Url.Action("LoginAdmin", "UserAdmin")">Đăng nhập.</a>
+    </div>
+}

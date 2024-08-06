@@ -1,0 +1,138 @@
+﻿@model DoAn.Models.Order
+
+@{
+    ViewBag.Title = "OrderList";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@if (Session["UserAdmin"] != null)
+{
+    <table class="table table-bordered text-center">
+        <tr>
+            <th>
+                Mã khách hàng
+            </th>
+            <th>
+                Ngày đặt
+            </th>
+            <th>
+                Ngày giao
+            </th>
+            <th>
+                Mã sản phẩm
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Giá
+            </th>
+            <th>
+                Tình trạng thanh toán
+            </th>
+            <th>
+                Tình trạng giao hàng
+            </th>
+            <th>
+                Tổng thành tiền
+            </th>
+        </tr>
+
+        @foreach (var donHang in Model.DonHangs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => donHang.MaKhachHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => donHang.NgayDatHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => donHang.NgayGiaoHang)
+                </td>
+                <td>
+                    @foreach (var chiTiet in Model.ChiTietDonHangs.Where(c => c.MaDonHang == donHang.MaDonHang))
+                    {
+                        <div>@chiTiet.MaSanPham</div>
+                    }
+                </td>
+                <td>
+                    @foreach (var chiTiet in Model.ChiTietDonHangs.Where(c => c.MaDonHang == donHang.MaDonHang))
+                    {
+                        <div>@chiTiet.TenSanPham</div>
+                    }
+                </td>
+
+                <td>
+                    @foreach (var chiTiet in Model.ChiTietDonHangs.Where(c => c.MaDonHang == donHang.MaDonHang))
+                    {
+                        <div>@chiTiet.SoLuong</div>
+                    }
+                </td>
+                <td>
+                    @foreach (var chiTiet in Model.ChiTietDonHangs.Where(c => c.MaDonHang == donHang.MaDonHang))
+                    {
+                        <div>@chiTiet.GiaBan</div>
+                    }
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => donHang.DaThanhToan)
+                </td>
+                <td>
+                    <input type="checkbox" class="chkThanhToan" data-madonhang="@donHang.MaDonHang" @(donHang.TinhTrangGiaoHang ? "checked" : "") />
+                </td>
+                <td>
+                    @{
+                        decimal? tongThanhTien = 0;
+                    }
+
+                    @foreach (var chiTiet in Model.ChiTietDonHangs.Where(c => c.MaDonHang == donHang.MaDonHang))
+                    {
+                        <br />
+                        tongThanhTien += chiTiet.SoLuong * chiTiet.GiaBan;
+                    }
+
+                    <div>@tongThanhTien</div>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+<div class="text-center alert">
+    <h1>Hãy đăng nhập để có quyền quản trị viên!</h1>
+    <a style="font-size:32px" href="@Url.Action("LoginAdmin", "UserAdmin")">Đăng nhập.</a>
+</div>
+}
+
+<script>
+    $(document).ready(function () {
+        $(".chkThanhToan").change(function () {
+            var maDonHang = $(this).data("madonhang");
+            var isChecked = $(this).prop("checked");
+
+            // Gửi dữ liệu lên server sử dụng Ajax
+            $.ajax({
+                type: "POST",
+                url: "/Admin/ProductsAdmin/UpdateTinhTrang",
+                data: { maDonHang: maDonHang, isChecked: isChecked },
+                success: function (data) {
+                    if (data.success === 'true') {
+                        console.log('Data updated successfully');
+                       
+                        location.reload();
+                    } else {
+                        console.error('Error updating data: ' + data.error);
+                    }
+                },
+                error: function (error) {
+                    console.error('AJAX request failed: ' + error.statusText);
+                }
+            });
+        });
+    });
+</script>

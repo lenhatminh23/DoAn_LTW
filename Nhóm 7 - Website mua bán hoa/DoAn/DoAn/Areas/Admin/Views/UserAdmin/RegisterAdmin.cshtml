@@ -1,0 +1,106 @@
+﻿@model DoAn.Models.QuanTriVien
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Register Admin</title>
+    <!-- Custom fonts for this template-->
+    <link href="~/Areas/Admin/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="~/Areas/Admin/Content/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .form-control {
+            font-size: .8rem;
+            border-radius: 10rem;
+            padding: 1.5rem 1rem;
+        }
+        .btn-user {
+            font-size: .8rem;
+            border-radius: 10rem;
+            padding: 0.75rem 1rem;
+        }
+        .success-message {
+            color:red;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            @using (Ajax.BeginForm("RegisterAdmin", "UserAdmin", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "result", OnSuccess = "registerSuccess" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <form class="user">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(temp => temp.TenQTV, new { placeholder = "Full name", @class = "form-control form-control-user", id = "exampleFullName" })
+                                        @Html.ValidationMessageFor(temp => temp.TenQTV)
+
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(temp => temp.EmailQTV, new { placeholder = "Email Address", @class = "form-control form-control-user", id = "exampleInputEmail" })
+                                        @Html.ValidationMessageFor(temp => temp.EmailQTV)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(temp => temp.TaiKhoanQTV, new { placeholder = "Username", @class = "form-control form-control-user", id = "exampleInputUsername" })
+                                        @Html.ValidationMessageFor(temp => temp.TaiKhoanQTV)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.PasswordFor(temp => temp.MatKhauQTV, new { placeholder = "Password", @class = "form-control form-control-user", id = "exampleInputPassword" })
+                                        @Html.ValidationMessageFor(temp => temp.MatKhauQTV)
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        Register Account
+                                    </button>
+                                </form>
+                                if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+                                {
+                                    <div class="success-message">
+                                        @ViewBag.SuccessMessage
+                                    </div>
+                                }
+                            }
+
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="/Admin/UserAdmin/LoginAdmin">Already have an account? Login!</a>
+                            </div>
+                            <div id="result"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Areas/Admin/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Areas/Admin/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Areas/Admin/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Areas/Admin/Content/js/sb-admin-2.min.js"></script>
+</body>
+</html>
